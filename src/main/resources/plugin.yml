@@ -1,0 +1,4 @@
+name: TelephonePlugin
+version: '0.1-Beta'
+main: restar.dev.telephonePlugin.TelephonePlugin
+api-version: '1.21'
