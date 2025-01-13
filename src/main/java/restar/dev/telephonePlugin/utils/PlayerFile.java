@@ -1,4 +1,5 @@
 package restar.dev.telephonePlugin.utils;
+import org.bukkit.entity.Player;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -11,9 +12,9 @@ public class PlayerFile {
     private String uuid;
     private String name;
     private int phoneNumber;
-    private static int PREFIX = 39;
-    private static int MINRND = 100000;
-    private static int MAXRND = 900000;
+    private final static int PREFIX = 39;
+    private final static int MINRND = 100000;
+    private final static int MAXRND = 900000;
 
 
     public String getUuid() {
@@ -116,7 +117,7 @@ public class PlayerFile {
             playerData.put("name", name);
             playerData.put("phone", phoneNumber);
 
-            // Scrivere la mappa nel file YAML
+            // write the map inside the YAML file
             try (FileWriter writer = new FileWriter(fileYml)) {
                 yaml.dump(playerData, writer);
             } catch (IOException e) {
@@ -132,5 +133,17 @@ public class PlayerFile {
         int number = MINRND + random.nextInt(MAXRND);
 
         return Integer.parseInt(""+ PREFIX + number);
+    }
+
+    public void setPlayerFile(Player player){
+        String uuid = String.valueOf(player.getUniqueId());
+        String playerName = player.getName();
+
+        setName(playerName);
+        setUuid(uuid);
+
+        createPlayerFile(uuid,playerName);
+
+
     }
 }

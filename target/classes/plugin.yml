@@ -2,3 +2,16 @@ name: TelephonePlugin
 version: '0.1-Beta'
 main: restar.dev.telephonePlugin.TelephonePlugin
 api-version: '1.21'
+commands:
+  getnumber:
+    description: Give the player a phone number
+    usage: /<getnumber>
+    permission: telephoneplugin.getnumber
+  changenumber:
+    description: Change player's phone number
+    usage: /<changenumber> <playername>
+    permission: telephoneplugin.changenumber
+  permissions:
+    telephoneplugin.changenumber.others:
+      description: Change other player's phone number
+      default: op
