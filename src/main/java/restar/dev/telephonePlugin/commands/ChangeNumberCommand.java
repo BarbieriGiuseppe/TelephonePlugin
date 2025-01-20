@@ -1,20 +1,13 @@
 package restar.dev.telephonePlugin.commands;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import restar.dev.telephonePlugin.utils.PlayerFile;
 
-import java.util.Collections;
-import java.util.Objects;
-
-public class ChangeNumber implements CommandExecutor {
+public class ChangeNumberCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

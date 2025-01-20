@@ -12,7 +12,7 @@ import restar.dev.telephonePlugin.utils.PlayerFile;
 
 import java.util.Collections;
 
-public class GetNumber implements CommandExecutor {
+public class GetNumberCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
