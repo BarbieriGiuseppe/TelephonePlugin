@@ -6,12 +6,29 @@ commands:
   getnumber:
     description: Give the player a phone number
     usage: /<getnumber>
-    permission: telephoneplugin.getnumber
+    permission: telephoneplugin.getnumbercommand
   changenumber:
     description: Change player's phone number
     usage: /<changenumber> <playername>
-    permission: telephoneplugin.changenumber
-  permissions:
-    telephoneplugin.changenumber.others:
-      description: Change other player's phone number
-      default: op
+    permission: telephoneplugin.changenumbercommand
+  call:
+    description: Call another player
+    usage: /call <playername>
+    permission: telephoneplugin.callcommand
+  callaccept:
+    description: Accept or deny a call
+    usage: /callaccept
+    permission: telephoneplugin.callresponsecommand
+  calldeny:
+    description: Accept or deny a call
+    usage: /calldeny
+    permission: telephoneplugin.callresponsecommand
+
+
+permissions:
+  telephoneplugin.changenumber.others:
+    description: Change other player's phone number
+    default: op
+  telephoneplugin.call:
+    description: Permission to call other players
+    default: true

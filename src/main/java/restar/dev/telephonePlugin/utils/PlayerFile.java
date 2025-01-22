@@ -13,8 +13,8 @@ public class PlayerFile {
     private String name;
     private int phoneNumber;
     private final static int PREFIX = 39;
-    private final static int MINRND = 100000;
-    private final static int MAXRND = 900000;
+    private final static int MINRND = 10000000;
+    private final static int MAXRND = 90000000;
 
 
     public String getUuid() {
