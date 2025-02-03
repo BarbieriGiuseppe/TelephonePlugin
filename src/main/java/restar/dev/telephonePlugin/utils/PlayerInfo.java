@@ -13,8 +13,6 @@ public class PlayerInfo {
     private final static int MAXRND = 90000000;
 
     public PlayerInfo() {
-       // this.phoneNumber = phoneNumber;
-       // this.player = player;
     }
 
 
@@ -33,8 +31,6 @@ public class PlayerInfo {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-
 
     public String generatePhoneNumber(){
             Random random = new Random();
