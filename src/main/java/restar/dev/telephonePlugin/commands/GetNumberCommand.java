@@ -8,33 +8,44 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import restar.dev.telephonePlugin.utils.PlayerFile;
+import restar.dev.telephonePlugin.utils.PlayerInfo;
+import restar.dev.telephonePlugin.utils.YamlFileUtils;
 
 import java.util.Collections;
+import java.util.Objects;
 
 public class GetNumberCommand implements CommandExecutor {
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player) {
-            PlayerFile playerFile = new PlayerFile();
-            playerFile.setPlayerFile(player);
+            YamlFileUtils yamlFileUtils = new YamlFileUtils();
+            PlayerInfo playerInfo = new PlayerInfo();
+            yamlFileUtils.loadFile(player);
 
-            int phoneNumber = playerFile.getPhoneNumber();
+            String phoneNumber = yamlFileUtils.get().getString("phoneNumber");
+            if (Objects.equals(phoneNumber, "")) {
+                phoneNumber = playerInfo.generatePhoneNumber();
+                //here save the phone number inside his yml file
+                yamlFileUtils.get().set("PhoneNumber", phoneNumber);
+                yamlFileUtils.saveFile();
+
+            }
 
             ItemStack paper = new ItemStack(Material.PAPER, 1);
             ItemMeta meta = paper.getItemMeta();
 
-            // Imposta il nome e la descrizione dell'oggetto
             if (meta != null) {
-                meta.displayName(Component.text(player.getName() + "Phone Number"));
-                meta.lore(Collections.singletonList(Component.text(phoneNumber)));
+                meta.displayName(Component.text(player.getName() + " Phone Number"));
+                meta.lore(Collections.singletonList(Component.text("Number: " + phoneNumber)));
 
                 paper.setItemMeta(meta);
             }
 
-            // Aggiungi l'oggetto all'inventario del giocatore
             player.getInventory().addItem(paper);
+
+            player.sendMessage("Your phone number is: " + phoneNumber);
 
             return true;
         }

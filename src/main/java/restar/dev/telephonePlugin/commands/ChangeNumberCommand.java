@@ -5,12 +5,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import restar.dev.telephonePlugin.utils.PlayerFile;
+import restar.dev.telephonePlugin.utils.PlayerInfo;
+import restar.dev.telephonePlugin.utils.YamlFileUtils;
+
+import java.util.Objects;
 
 public class ChangeNumberCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        PlayerInfo playerInfo = new PlayerInfo();
+        YamlFileUtils yamlFileUtils = new YamlFileUtils();
+
         if (sender instanceof Player player) {
             Player targetPlayer = player;
 
@@ -25,14 +31,13 @@ public class ChangeNumberCommand implements CommandExecutor {
                     player.sendMessage("Player not found.");
                     return false;
                 }
+
             }
 
-            PlayerFile playerFile = new PlayerFile();
-            playerFile.setPlayerFile(targetPlayer);
-
-            int phoneNumber = playerFile.generatePhoneNumber();
-            playerFile.setUuid(String.valueOf(targetPlayer.getUniqueId()));
-            playerFile.updatePlayerFile(String.valueOf(targetPlayer.getUniqueId()));
+            yamlFileUtils.loadFile(player);
+            String phoneNumber = playerInfo.generatePhoneNumber();
+            yamlFileUtils.get().set("PhoneNumber", phoneNumber);
+            yamlFileUtils.saveFile();
 
             sender.sendMessage("Phone number changed for: " + targetPlayer.getName());
             targetPlayer.sendMessage("Your phone number has been changed " + phoneNumber);
